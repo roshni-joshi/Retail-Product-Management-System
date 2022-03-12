@@ -1,0 +1,23 @@
+insert into vendor values(1,500,3.5,'Amazon');
+insert into vendor values(2,400,4.5,'Flipkart');
+insert into vendor values(3,300,4,'Ebay');
+insert into vendor values(4,100,1.5,'Dmart');
+insert into vendor values(5,200,4.8,'ShopClues');
+insert into vendor values(6,150,3.1,'Myntra');
+insert into vendor values(7,250,2.5,'Handloom house');
+
+insert into vendor_stock values(201,101,100,'2021-05-05',1);
+insert into vendor_stock values(202,103,80,'2021-09-09',1);
+insert into vendor_stock values(203,101,150,'2022-10-07',2);
+insert into vendor_stock values(204,104,1000,'2021-11-22',2);
+insert into vendor_stock values(205,105,50,'2022-07-25',3);
+insert into vendor_stock values(206,103,500,'2021-05-08',3);
+insert into vendor_stock values(207,102,200,'2021-06-15',3);
+insert into vendor_stock values(208,103,300,'2022-09-16',4);
+insert into vendor_stock values(209,105,500,'2021-07-28',4);
+insert into vendor_stock values(210,101,700,'2021-05-09',5);
+insert into vendor_stock values(211,105,150,'2022-11-14',5);
+insert into vendor_stock values(212,102,300,'2021-12-16',6);
+insert into vendor_stock values(213,104,750,'2022-02-28',6);
+insert into vendor_stock values(214,102,850,'2022-03-16',7);
+insert into vendor_stock values(215,103,70,'2021-02-20',7);

@@ -1,0 +1,5 @@
+insert into product values(101,'Rear Quad Camera with 48 MP Sony IMX586 Sensor, 16 MP Ultra Wide Angle, 5 MP macro lens and 2 MP monochrome lens,Front Camera with 16 MP Sony IMX471 Sensor','mobile.jpg','Mobile',30000.0,4.5);
+insert into product values(102,'4 GB RAM | 64 GB ROM | Expandable Upto 256 GB. 25.65 cm (10.1 inch) Full HD Display. 8 MP Primary Camera | 5 MP Front. Android 9.0 (Pie) | Battery: 7000 mAh Lithium Polymer.','tablet.jpg','Tablet',45000,3.0);
+insert into product values(103,'Inspiron 15 7000 Series - 7501. 3-Cell Battery, 56WHr (Integrated). 15.6-inch FHD (1920 x 1080) Anti-glare LED Backlight Non-touch Wide Viewing Angle Display.8GB, onboard, DDR4, 2933MHz','laptop.jpg','Laptop',70000,4.5);
+insert into product values(104,'Extra Bass: WF-XB700 features EXTRA BASS for seriously powerful, punchy low-end sound. Your favourite basslines never sounded so good with 12mm driver unit','earbuds.jpg','Earbuds',7000,3.5);
+insert into product values(105,'JBL Signature Sound. 10 Hours of Playtime under optimum audio settings. Wireless Bluetooth Streaming. IPX7 Waterproof with durable fabric material','speaker.jpg','Speaker',5500,4.0);
