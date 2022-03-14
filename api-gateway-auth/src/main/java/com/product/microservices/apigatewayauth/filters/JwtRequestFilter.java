@@ -29,7 +29,6 @@ public class JwtRequestFilter implements GlobalFilter {
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
 		ServerHttpRequest request = exchange.getRequest();
-		log.info("Inside gateway filter : " + request.getURI().toString());
 		
 		if(this.isAuthMissing(request))
 		{

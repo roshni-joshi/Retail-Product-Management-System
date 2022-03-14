@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.product.microservices.ecommerce.model.Product;
 
-@FeignClient(name = "product", url = "localhost:8765/product")
+@FeignClient(name = "product", url = "${api.gateway.url}/product")
 //@FeignClient(name = "product")
 public interface ProductProxy {
 	

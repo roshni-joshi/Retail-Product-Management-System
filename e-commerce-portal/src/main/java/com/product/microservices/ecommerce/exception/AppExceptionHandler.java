@@ -17,6 +17,7 @@ public class AppExceptionHandler {
 	public ResponseEntity<Object> handleOtherExceptions(Exception exception, WebRequest request)
 	{
 		log.debug("Exception handled : " + exception.getMessage());
+		exception.printStackTrace();
 		return new ResponseEntity<Object>("Error occured while accessing the resource. Please contact support service at 111-111.", new HttpHeaders(), HttpStatus.NOT_FOUND);
 	}
 }

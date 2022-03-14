@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import com.product.microservices.ecommerce.model.Cart;
 import com.product.microservices.ecommerce.model.Wishlist;
 
-@FeignClient(name = "proceed-to-buy", url = "localhost:8765/proceed-to-buy")
+@FeignClient(name = "proceed-to-buy", url = "${api.gateway.url}/proceed-to-buy")
 //@FeignClient(name = "proceed-to-buy")
 public interface ProceedToBuyProxy {
 

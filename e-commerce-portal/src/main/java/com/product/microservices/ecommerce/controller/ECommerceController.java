@@ -295,10 +295,9 @@ public class ECommerceController implements ErrorController {
 		throw new Exception();
     }
 
-    @Override
-    public String getErrorPath() {
-        return PATH;
-    }
+	/*
+	 * @Override public String getErrorPath() { return PATH; }
+	 */
 	
 	public ModelAndView ServiceNotAvailable(FeignException.Unauthorized ex)
 	{

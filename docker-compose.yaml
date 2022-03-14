@@ -1,0 +1,128 @@
+version: '3.7'
+
+networks:
+  product-network:
+
+services:
+  eureka-server:
+    image: roshnijoshi/product-microservices-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    networks:
+      - product-network
+
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    ports:
+      - "9411:9411"
+    networks:
+      - product-network
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+
+  rabbitmq:
+    image: rabbitmq:3.8.12-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - product-network
+
+  authorization:
+    image: roshnijoshi/product-microservices-authorization:0.0.1-SNAPSHOT
+    ports:
+      - "8770:8770"
+    networks:
+      - product-network
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  api-gateway:
+    image: roshnijoshi/product-microservices-api-gateway-auth:0.0.1-SNAPSHOT
+    ports:
+      - "8765:8765"
+    networks:
+      - product-network
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  proceed-to-buy:
+    image: roshnijoshi/product-microservices-proceed-to-buy:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    networks:
+      - product-network
+    depends_on:
+      - eureka-server
+      - api-gateway
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      API.GATEWAY.URL: api-gateway:8765
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  product:
+    image: roshnijoshi/product-microservices-product:0.0.1-SNAPSHOT
+    ports:
+      - "8020:8020"
+    networks:
+      - product-network
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  vendor:
+    image: roshnijoshi/product-microservices-vendor:0.0.1-SNAPSHOT
+    ports:
+      - "8010:8010"
+    networks:
+      - product-network
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  e-commerce-portal:
+    image: roshnijoshi/product-microservices-e-commerce-portal:0.0.1-SNAPSHOT
+    ports:
+      - "8088:8088"
+    networks:
+      - product-network
+    depends_on:
+      - eureka-server
+      - authorization
+      - api-gateway
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      API.GATEWAY.URL: api-gateway:8765
+      AUTH.URL: authorization:8770

@@ -8,7 +8,7 @@ import com.product.microservices.ecommerce.model.JwtToken;
 
 import io.github.resilience4j.retry.annotation.Retry;
 
-@FeignClient(name = "authorization", url = "localhost:8770")
+@FeignClient(name = "authorization", url = "${auth.url}")
 //@FeignClient(name = "authorization")
 public interface AuthorizationProxy {
 

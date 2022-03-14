@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.product.microservices.proceedtobuy.model.Vendor;
 
-@FeignClient(name = "vendor", url = "localhost:8765/vendor")
+@FeignClient(name = "vendor", url = "${api.gateway.url}/vendor")
 //@FeignClient(name = "vendor")
 public interface VendorProxy {
 	
